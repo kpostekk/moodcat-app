@@ -108,7 +108,7 @@ export const useAudioRecorder = (audio?: MediaStream) => {
 
   const startRecording = useCallback(() => {
     if (!recorder) throw new Error("Recorder is not ready!")
-    recorder.start(1000)
+    recorder.start()
     setRecordingStartedAt(new Date())
     setRecorderState(recorder.state)
     setChunks([])

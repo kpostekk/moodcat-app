@@ -1,7 +1,7 @@
 import { client } from "./client"
 
-export const loginPatient = async () => {
-  await client.POST("/api/auth/login", {
+export const loginPatient = () => {
+  return client.POST("/api/auth/login", {
     params: {
       query: {
         useCookies: true,
@@ -14,8 +14,8 @@ export const loginPatient = async () => {
   })
 }
 
-export const loginTherapist = async () => {
-  await client.POST("/api/auth/login", {
+export const loginTherapist = () => {
+  return client.POST("/api/auth/login", {
     params: {
       query: {
         useCookies: true,
@@ -26,4 +26,9 @@ export const loginTherapist = async () => {
       password: import.meta.env.VITE_DEMO_PASSWORD,
     },
   })
+}
+
+export const logout = () => {
+  const cookie = document.cookie
+  console.log("cookie", cookie)
 }

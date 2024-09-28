@@ -421,6 +421,40 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
+    "/api/notes/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Note with Text */
+        post: operations["Create Note"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/notes/create-audio": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Note with Audio Url */
+        post: operations["Create Note Audio"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/openai/chatgpt": {
         parameters: {
             query?: never;
@@ -435,6 +469,26 @@ export type paths = {
          * @description Wygeneruj request do chatgpt
          */
         post: operations["CreateGptChatCompletion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/openai/whisper": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Stwórz transkrypcję mowy
+         * @description Stwórz transkrypcję mowy
+         */
+        post: operations["CreateWhisperSendAudioFile"];
         delete?: never;
         options?: never;
         head?: never;
@@ -508,6 +562,36 @@ export type components = {
         CreateGptChatCompletionResponse: {
             data?: components["schemas"]["ChatGptResultDTO"];
         };
+        /** @description Notatka do stworzenia */
+        CreateNoteAudioRequest: {
+            noteTitle?: string | null;
+            /** @description Url do pliku audio, który ma zostać użyty do stworzenia notatki */
+            audioUrl?: string | null;
+        };
+        /** @description Odpowiedź na żądanie */
+        CreateNoteResponse: {
+            response?: components["schemas"]["CreateNoteResponseDTO"];
+        };
+        CreateNoteResponseDTO: {
+            noteId?: string | null;
+            title?: string | null;
+            content?: string | null;
+        };
+        /** @description Notatka do stworzenia */
+        CreateNoteTextRequest: {
+            requestData?: components["schemas"]["CreateNoteTextRequestDTO"];
+        };
+        CreateNoteTextRequestDTO: {
+            title?: string | null;
+            body?: string | null;
+        };
+        /** @description Request do stworzenia */
+        CreateWhisperSendAudioFileRequest: {
+            data?: components["schemas"]["WhisperRequestDTO"];
+        };
+        CreateWhisperSendAudioFileResponse: {
+            data?: components["schemas"]["WhisperResultDTO"];
+        };
         ForgotPasswordRequest: {
             email: string | null;
         };
@@ -542,6 +626,16 @@ export type components = {
             password: string | null;
             twoFactorCode?: string | null;
             twoFactorRecoveryCode?: string | null;
+        };
+        ProblemDetails: {
+            type?: string | null;
+            title?: string | null;
+            /** Format: int32 */
+            status?: number | null;
+            detail?: string | null;
+            instance?: string | null;
+        } & {
+            [key: string]: unknown;
         };
         RefreshRequest: {
             refreshToken: string | null;
@@ -587,6 +681,17 @@ export type components = {
             count?: number;
             data?: components["schemas"]["UserResponseDTO"][] | null;
         };
+        WhisperRequestDTO: {
+            model?: string | null;
+            file?: string | null;
+        };
+        WhisperResultDTO: {
+            id?: string | null;
+            object?: string | null;
+            created?: string | null;
+            model?: string | null;
+            result?: string | null;
+        };
     };
     responses: never;
     parameters: never;
@@ -618,6 +723,72 @@ export interface operations {
             };
         };
     };
+    "Create Note": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateNoteTextRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateNoteResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
+    "Create Note Audio": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateNoteAudioRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateNoteResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
     CreateGptChatCompletion: {
         parameters: {
             query?: never;
@@ -638,6 +809,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CreateGptChatCompletionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CreateWhisperSendAudioFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateWhisperSendAudioFileRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateWhisperSendAudioFileResponse"];
                 };
             };
             /** @description Bad Request */
