@@ -10,10 +10,10 @@ function Component() {
   usePatient()
 
   return (
-    <div className="relative">
-      <Navbar>
+    <Navbar>
+      <div className="container relative mx-auto max-w-xl">
         <Outlet />
-      </Navbar>
-    </div>
+      </div>
+    </Navbar>
   )
 }
