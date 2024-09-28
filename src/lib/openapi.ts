@@ -4,6 +4,23 @@
  */
 
 export type paths = {
+    "/api/auth/custom/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Log out */
+        post: operations["Logout"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/auth/register": {
         parameters: {
             query?: never;
@@ -584,6 +601,8 @@ export type components = {
         CreateNoteTextRequestDTO: {
             title?: string | null;
             body?: string | null;
+            /** Format: int32 */
+            happinessLevel?: number;
         };
         /** @description Request do stworzenia */
         CreateWhisperSendAudioFileRequest: {
@@ -682,7 +701,6 @@ export type components = {
             data?: components["schemas"]["UserResponseDTO"][] | null;
         };
         WhisperRequestDTO: {
-            model?: string | null;
             file?: string | null;
         };
         WhisperResultDTO: {
@@ -701,6 +719,31 @@ export type components = {
 };
 export type $defs = Record<string, never>;
 export interface operations {
+    Logout: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     "MapIdentityApi-/api/auth/confirmEmail": {
         parameters: {
             query?: {

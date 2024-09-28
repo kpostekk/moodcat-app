@@ -13,9 +13,9 @@ export const useAudioStream = () => {
     return stream
   })
 
-  // useEffect(() => {
-  //   return () => audioAsync.value?.getTracks().forEach((t) => t.stop())
-  // }, [audioAsync.value])
+  useEffect(() => {
+    return () => audioAsync.value?.getTracks().forEach((t) => t.stop())
+  }, [audioAsync.value])
 
   return audioAsync.value
 }
