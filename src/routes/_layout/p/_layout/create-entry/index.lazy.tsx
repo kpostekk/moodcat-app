@@ -9,10 +9,10 @@ function Component() {
   return (
     <div className="grid gap-2">
       <Link to="/p/create-entry/voice">
-        <Button className="h-72 w-full">Talk to me</Button>
+        <Button className="h-72 text-xl w-full">Talk to me</Button>
       </Link>
       <Link to="/p/create-entry/text">
-        <Button variant="secondary" className="h-24 w-full">
+        <Button variant="secondary" className="h-24 text-xl w-full">
           Write to me
         </Button>
       </Link>

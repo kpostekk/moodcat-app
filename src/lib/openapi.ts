@@ -447,7 +447,7 @@ export type paths = {
         };
         get?: never;
         put?: never;
-        /** Create Note with Text */
+        /** Create Note with Text or Audio */
         post: operations["Create Note"];
         delete?: never;
         options?: never;
@@ -455,17 +455,40 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
-    "/api/notes/create-audio": {
+    "/api/notes": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /**
+         * Get note by id
+         * @description Returns notes with provided ID
+         */
+        get: operations["GetNoteEndpoint"];
         put?: never;
-        /** Create Note with Audio Url */
-        post: operations["Create Note Audio"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/notes/today": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Gets Todays Notes
+         * @description This endpoint is used to get all the notes from the database for authorised user for today.
+         */
+        get: operations["GetTodaysNotesEndpoint"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -550,7 +573,7 @@ export type components = {
         };
         ChatGptRequestDTO: {
             model?: string | null;
-            messages?: string | null;
+            message?: string | null;
         };
         ChatGptResultChoicesMessageDTO: {
             role?: string | null;
@@ -579,11 +602,20 @@ export type components = {
         CreateGptChatCompletionResponse: {
             data?: components["schemas"]["ChatGptResultDTO"];
         };
+        CreateNoteMetaDTO: {
+            providedQuestion?: string | null;
+            /** Format: int32 */
+            happinessLevel?: number;
+        };
         /** @description Notatka do stworzenia */
-        CreateNoteAudioRequest: {
-            noteTitle?: string | null;
-            /** @description Url do pliku audio, który ma zostać użyty do stworzenia notatki */
+        CreateNoteRequest: {
+            data?: components["schemas"]["CreateNoteRequestDTO"];
+        };
+        CreateNoteRequestDTO: {
+            title?: string | null;
             audioUrl?: string | null;
+            text?: string | null;
+            meta?: components["schemas"]["CreateNoteMetaDTO"];
         };
         /** @description Odpowiedź na żądanie */
         CreateNoteResponse: {
@@ -594,16 +626,6 @@ export type components = {
             title?: string | null;
             content?: string | null;
         };
-        /** @description Notatka do stworzenia */
-        CreateNoteTextRequest: {
-            requestData?: components["schemas"]["CreateNoteTextRequestDTO"];
-        };
-        CreateNoteTextRequestDTO: {
-            title?: string | null;
-            body?: string | null;
-            /** Format: int32 */
-            happinessLevel?: number;
-        };
         /** @description Request do stworzenia */
         CreateWhisperSendAudioFileRequest: {
             data?: components["schemas"]["WhisperRequestDTO"];
@@ -613,6 +635,9 @@ export type components = {
         };
         ForgotPasswordRequest: {
             email: string | null;
+        };
+        GetTodaysNotesResult: {
+            notes?: components["schemas"]["NoteDetailedResponseDTO"][] | null;
         };
         /** @description Odpowiedź na żądanie pobrania paginowanej listy użytkowników */
         GetUsersResponse: {
@@ -645,6 +670,27 @@ export type components = {
             password: string | null;
             twoFactorCode?: string | null;
             twoFactorRecoveryCode?: string | null;
+        };
+        NoteAttachmentDetailedResponseDTO: {
+            id?: string | null;
+            name?: string | null;
+            resourceUrl?: string | null;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string | null;
+        };
+        NoteDetailedResponseDTO: {
+            id?: string | null;
+            content?: string | null;
+            title?: string | null;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string | null;
+            /** Format: double */
+            happiness?: number;
+            attachments?: components["schemas"]["NoteAttachmentDetailedResponseDTO"][] | null;
         };
         ProblemDetails: {
             type?: string | null;
@@ -775,7 +821,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["CreateNoteTextRequest"];
+                "application/json": components["schemas"]["CreateNoteRequest"];
             };
         };
         responses: {
@@ -799,18 +845,16 @@ export interface operations {
             };
         };
     };
-    "Create Note Audio": {
+    GetNoteEndpoint: {
         parameters: {
-            query?: never;
+            query: {
+                noteId: string;
+            };
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateNoteAudioRequest"];
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description OK */
             200: {
@@ -818,11 +862,49 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CreateNoteResponse"];
+                    "application/json": components["schemas"]["NoteDetailedResponseDTO"];
+                };
+            };
+        };
+    };
+    GetTodaysNotesEndpoint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTodaysNotesResult"];
                 };
             };
             /** @description Bad Request */
             400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
                 headers: {
                     [name: string]: unknown;
                 };

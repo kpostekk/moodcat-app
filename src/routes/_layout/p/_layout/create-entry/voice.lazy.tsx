@@ -4,11 +4,12 @@ import { useAudioRecorder, useAudioStream } from "@/lib/audio"
 import { createLazyFileRoute } from "@tanstack/react-router"
 import { useEffect, useMemo, useState } from "react"
 import * as dateFns from "date-fns"
-import { useMutation } from "@tanstack/react-query"
+import { DefaultError, useMutation } from "@tanstack/react-query"
 import * as Icons from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { AudioPlayer } from "@/components/ui/audio-player"
 import { createAudioNote } from "@/lib/notes"
+import { CustomCircularSlider } from "@/components/ui/circular-slider"
 
 export const Route = createLazyFileRoute(
   "/_layout/p/_layout/create-entry/voice",
@@ -21,6 +22,8 @@ function Component() {
   const audio = useAudioStream()
   const recorder = useAudioRecorder(audio)
   const [now, setNow] = useState(new Date())
+  const [happiness, setHappiness] = useState<number>()
+  const [hideHappy, setHideHappy] = useState(false)
 
   useEffect(() => {
     if (recorder.recorderState !== "recording") return
@@ -56,8 +59,8 @@ function Component() {
     return dateFns.differenceInSeconds(now, recorder.recordingStartedAt)
   }, [now, recorder.recordingEndedAt, recorder.recordingStartedAt])
 
-  const uploadMutation = useMutation({
-    mutationFn: createAudioNote,
+  const uploadMutation = useMutation<unknown, DefaultError, [Blob, number]>({
+    mutationFn: ([b, n]) => createAudioNote(b, n),
     onSuccess: () => {
       navigate({ to: "/p/create-entry/submitted" })
     },
@@ -74,6 +77,28 @@ function Component() {
   }, [recorder, recordingDuration])
 
   if (!audio) return
+
+  if (!hideHappy) {
+    return (
+      <div className="grid place-content-center">
+        <h1 className="my-4 text-2xl font-semibold">I feel...</h1>
+        <CustomCircularSlider
+          initValue={20}
+          onChange={(n) => {
+            setHappiness(5 - Math.floor(n / 10))
+          }}
+        />
+        <p>{happiness}</p>
+        <Button
+          onClick={() => {
+            setHideHappy(true)
+          }}
+        >
+          Next
+        </Button>
+      </div>
+    )
+  }
 
   return (
     <div className="grid place-items-center gap-2">
@@ -99,7 +124,7 @@ function Component() {
           <AudioPlayer src={blobUrl} duration={recordingDuration ?? 0} />
           <Button
             disabled={uploadMutation.isPending}
-            onClick={() => uploadMutation.mutate(blob)}
+            onClick={() => uploadMutation.mutate([blob, happiness ?? 0])}
           >
             {uploadMutation.isIdle && (
               <>
