@@ -5,6 +5,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/api/:1"
+    },
+    {
+      "source": "/swagger",
+      "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/swagger"
     }
   ]
 }
