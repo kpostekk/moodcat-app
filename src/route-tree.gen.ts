@@ -31,6 +31,9 @@ const LayoutPLayoutLatestSummaryLazyImport = createFileRoute(
 const LayoutPLayoutHistoryLazyImport = createFileRoute(
   "/_layout/p/_layout/history",
 )()
+const LayoutPLayoutCreateEntryVoiceLazyImport = createFileRoute(
+  "/_layout/p/_layout/create-entry-voice",
+)()
 const LayoutPLayoutCreateEntryLazyImport = createFileRoute(
   "/_layout/p/_layout/create-entry",
 )()
@@ -102,6 +105,16 @@ const LayoutPLayoutHistoryLazyRoute = LayoutPLayoutHistoryLazyImport.update({
 } as any).lazy(() =>
   import("./routes/_layout/p/_layout/history.lazy").then((d) => d.Route),
 )
+
+const LayoutPLayoutCreateEntryVoiceLazyRoute =
+  LayoutPLayoutCreateEntryVoiceLazyImport.update({
+    path: "/create-entry-voice",
+    getParentRoute: () => LayoutPLayoutRoute,
+  } as any).lazy(() =>
+    import("./routes/_layout/p/_layout/create-entry-voice.lazy").then(
+      (d) => d.Route,
+    ),
+  )
 
 const LayoutPLayoutCreateEntryLazyRoute =
   LayoutPLayoutCreateEntryLazyImport.update({
@@ -178,6 +191,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LayoutPLayoutCreateEntryLazyImport
       parentRoute: typeof LayoutPLayoutImport
     }
+    "/_layout/p/_layout/create-entry-voice": {
+      id: "/_layout/p/_layout/create-entry-voice"
+      path: "/create-entry-voice"
+      fullPath: "/p/create-entry-voice"
+      preLoaderRoute: typeof LayoutPLayoutCreateEntryVoiceLazyImport
+      parentRoute: typeof LayoutPLayoutImport
+    }
     "/_layout/p/_layout/history": {
       id: "/_layout/p/_layout/history"
       path: "/history"
@@ -206,6 +226,7 @@ declare module "@tanstack/react-router" {
 
 interface LayoutPLayoutRouteChildren {
   LayoutPLayoutCreateEntryLazyRoute: typeof LayoutPLayoutCreateEntryLazyRoute
+  LayoutPLayoutCreateEntryVoiceLazyRoute: typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   LayoutPLayoutHistoryLazyRoute: typeof LayoutPLayoutHistoryLazyRoute
   LayoutPLayoutLatestSummaryLazyRoute: typeof LayoutPLayoutLatestSummaryLazyRoute
   LayoutPLayoutIndexLazyRoute: typeof LayoutPLayoutIndexLazyRoute
@@ -213,6 +234,8 @@ interface LayoutPLayoutRouteChildren {
 
 const LayoutPLayoutRouteChildren: LayoutPLayoutRouteChildren = {
   LayoutPLayoutCreateEntryLazyRoute: LayoutPLayoutCreateEntryLazyRoute,
+  LayoutPLayoutCreateEntryVoiceLazyRoute:
+    LayoutPLayoutCreateEntryVoiceLazyRoute,
   LayoutPLayoutHistoryLazyRoute: LayoutPLayoutHistoryLazyRoute,
   LayoutPLayoutLatestSummaryLazyRoute: LayoutPLayoutLatestSummaryLazyRoute,
   LayoutPLayoutIndexLazyRoute: LayoutPLayoutIndexLazyRoute,
@@ -257,6 +280,7 @@ export interface FileRoutesByFullPath {
   "/p": typeof LayoutPLayoutRouteWithChildren
   "/t": typeof LayoutTIndexLazyRoute
   "/p/create-entry": typeof LayoutPLayoutCreateEntryLazyRoute
+  "/p/create-entry-voice": typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   "/p/history": typeof LayoutPLayoutHistoryLazyRoute
   "/p/latest-summary": typeof LayoutPLayoutLatestSummaryLazyRoute
   "/p/": typeof LayoutPLayoutIndexLazyRoute
@@ -271,6 +295,7 @@ export interface FileRoutesByTo {
   "/p": typeof LayoutPLayoutIndexLazyRoute
   "/t": typeof LayoutTIndexLazyRoute
   "/p/create-entry": typeof LayoutPLayoutCreateEntryLazyRoute
+  "/p/create-entry-voice": typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   "/p/history": typeof LayoutPLayoutHistoryLazyRoute
   "/p/latest-summary": typeof LayoutPLayoutLatestSummaryLazyRoute
 }
@@ -286,6 +311,7 @@ export interface FileRoutesById {
   "/_layout/p/_layout": typeof LayoutPLayoutRouteWithChildren
   "/_layout/t/": typeof LayoutTIndexLazyRoute
   "/_layout/p/_layout/create-entry": typeof LayoutPLayoutCreateEntryLazyRoute
+  "/_layout/p/_layout/create-entry-voice": typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   "/_layout/p/_layout/history": typeof LayoutPLayoutHistoryLazyRoute
   "/_layout/p/_layout/latest-summary": typeof LayoutPLayoutLatestSummaryLazyRoute
   "/_layout/p/_layout/": typeof LayoutPLayoutIndexLazyRoute
@@ -302,6 +328,7 @@ export interface FileRouteTypes {
     | "/p"
     | "/t"
     | "/p/create-entry"
+    | "/p/create-entry-voice"
     | "/p/history"
     | "/p/latest-summary"
     | "/p/"
@@ -315,6 +342,7 @@ export interface FileRouteTypes {
     | "/p"
     | "/t"
     | "/p/create-entry"
+    | "/p/create-entry-voice"
     | "/p/history"
     | "/p/latest-summary"
   id:
@@ -328,6 +356,7 @@ export interface FileRouteTypes {
     | "/_layout/p/_layout"
     | "/_layout/t/"
     | "/_layout/p/_layout/create-entry"
+    | "/_layout/p/_layout/create-entry-voice"
     | "/_layout/p/_layout/history"
     | "/_layout/p/_layout/latest-summary"
     | "/_layout/p/_layout/"
@@ -399,6 +428,7 @@ export const routeTree = rootRoute
       "parent": "/_layout/p",
       "children": [
         "/_layout/p/_layout/create-entry",
+        "/_layout/p/_layout/create-entry-voice",
         "/_layout/p/_layout/history",
         "/_layout/p/_layout/latest-summary",
         "/_layout/p/_layout/"
@@ -410,6 +440,10 @@ export const routeTree = rootRoute
     },
     "/_layout/p/_layout/create-entry": {
       "filePath": "_layout/p/_layout/create-entry.lazy.tsx",
+      "parent": "/_layout/p/_layout"
+    },
+    "/_layout/p/_layout/create-entry-voice": {
+      "filePath": "_layout/p/_layout/create-entry-voice.lazy.tsx",
       "parent": "/_layout/p/_layout"
     },
     "/_layout/p/_layout/history": {
