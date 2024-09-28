@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useAsync } from "react-use"
 
 const FFT_SIZE = 1024
@@ -80,4 +80,66 @@ export const useAudioLevels = (audio?: MediaStream) => {
   }, [audio])
 
   return levels
+}
+
+export const useAudioRecorder = (audio?: MediaStream) => {
+  const [recorder, setRecorder] = useState<MediaRecorder>()
+  const [chunks, setChunks] = useState<Blob[]>([])
+  const [recordingStartedAt, setRecordingStartedAt] = useState<Date>()
+  const [recordingEndedAt, setRecordingEndedAt] = useState<Date>()
+  const [recorderState, setRecorderState] =
+    useState<(typeof MediaRecorder)["prototype"]["state"]>("inactive")
+
+  useEffect(() => {
+    if (!audio) return
+
+    const rec = new MediaRecorder(audio)
+    setRecorder(rec)
+
+    return () => {
+      rec.stop()
+    }
+  }, [audio])
+
+  const updateChunks = useCallback((e: BlobEvent) => {
+    console.log(e)
+    setChunks((prev) => [...prev, e.data])
+  }, [])
+
+  const startRecording = useCallback(() => {
+    if (!recorder) throw new Error("Recorder is not ready!")
+    recorder.start(1000)
+    setRecordingStartedAt(new Date())
+    setRecorderState(recorder.state)
+    setChunks([])
+
+    // recorder.ondataavailable = updateChunks
+
+    recorder.addEventListener("dataavailable", updateChunks)
+
+    // return () => {
+    //   recorder.stop()
+    //   setRecorderState(recorder.state)
+    //   setRecordingEndedAt(new Date())
+    //   recorder.removeEventListener("dataavailable", updateChunks)
+    // }
+  }, [recorder, updateChunks])
+
+  const endRecording = useCallback(() => {
+    if (!recorder) throw new Error("")
+
+    recorder.stop()
+    setRecorderState(recorder.state)
+    setRecordingEndedAt(new Date())
+    // recorder.removeEventListener("dataavailable", updateChunks)
+  }, [recorder])
+
+  return {
+    startRecording,
+    endRecording,
+    chunks,
+    recorderState,
+    recordingEndedAt,
+    recordingStartedAt,
+  }
 }
