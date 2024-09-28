@@ -1,10 +1,11 @@
 import { useLogin, useUser } from "@/components/contexts/user-context"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useMutation } from "@tanstack/react-query"
 import { createLazyFileRoute } from "@tanstack/react-router"
-// import { User as UserIcon, BookHeart as BookHeartIcon } from "lucide-react"
 import * as Icons from "lucide-react"
-import { useCallback } from "react"
+import { loginPatient } from "@/lib/users"
+import { client } from "@/lib/client"
 
 export const Route = createLazyFileRoute("/_layout/login")({
   component: Component,
@@ -15,15 +16,23 @@ function Component() {
   const { setUser } = useLogin()
   const { user } = useUser()
 
-  const loginAsPatient = useCallback(() => {
-    setUser({ name: "Patient", type: "patient" })
-    navigate({ to: "/p" })
-  }, [navigate, setUser])
+  const loginPatientMutation = useMutation({
+    mutationFn: () => loginPatient(),
+    onSuccess: async () => {
+      const user = await client.GET("/api/auth/manage/info")
+      if (user.error) throw new Error()
 
-  const loginAsTherapist = useCallback(() => {
-    setUser({ name: "Therapist", type: "doctor" })
-    navigate({ to: "/t" })
-  }, [navigate, setUser])
+      setUser({ name: user.data.email ?? "Patient", type: "patient" })
+      navigate({ to: "/p" })
+    },
+  })
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      // for future use
+      setUser(undefined)
+    },
+  })
 
   return (
     <div className="grid h-screen w-screen place-items-center">
@@ -36,16 +45,29 @@ function Component() {
           {!user && (
             <>
               <Button
-                variant={"default"}
+                variant={
+                  loginPatientMutation.isError ? "destructive" : "default"
+                }
                 className="flex justify-around"
-                onClick={() => loginAsPatient()}
+                disabled={loginPatientMutation.isPending}
+                onClick={() => loginPatientMutation.mutate()}
               >
-                <Icons.User /> Login as patient
+                {loginPatientMutation.isIdle && (
+                  <>
+                    <Icons.User /> Login as patient
+                  </>
+                )}
+                {loginPatientMutation.isPending && (
+                  <Icons.Loader className="animate-spin" />
+                )}
+                {loginPatientMutation.isSuccess && <Icons.Check />}
+                {loginPatientMutation.isError && <>Login error</>}
               </Button>
               <Button
                 variant={"secondary"}
+                disabled
                 className="flex justify-around"
-                onClick={() => loginAsTherapist()}
+                // onClick={() => login()}
               >
                 <Icons.Heart />
                 Login as therapist
@@ -56,7 +78,7 @@ function Component() {
             <Button
               variant={"destructive"}
               className="flex justify-around"
-              onClick={() => setUser(undefined)}
+              onClick={() => logoutMutation.mutate()}
             >
               <Icons.LogOut />
               Logout {user.name}
