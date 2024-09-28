@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button"
 import { AudioVisualizer, Visualizer } from "@/components/ui/visualizer"
 import { useAudioRecorder, useAudioStream } from "@/lib/audio"
 import { createLazyFileRoute } from "@tanstack/react-router"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import * as dateFns from "date-fns"
 import { useMutation } from "@tanstack/react-query"
 import { uploadBlob } from "@/lib/upload"
 import * as Icons from "lucide-react"
 import { Progress } from "@/components/ui/progress"
-import { Slider } from "@/components/ui/slider"
+import { AudioPlayer } from "@/components/ui/audio-player"
+import { createAudioNote } from "@/lib/notes"
 
 export const Route = createLazyFileRoute(
   "/_layout/p/_layout/create-entry/voice",
@@ -17,10 +18,10 @@ export const Route = createLazyFileRoute(
 })
 
 function Component() {
+  const navigate = Route.useNavigate()
   const audio = useAudioStream()
   const recorder = useAudioRecorder(audio)
   const [now, setNow] = useState(new Date())
-  const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
     if (recorder.recorderState !== "recording") return
@@ -57,8 +58,21 @@ function Component() {
   }, [now, recorder.recordingEndedAt, recorder.recordingStartedAt])
 
   const uploadMutation = useMutation({
-    mutationFn: uploadBlob,
+    mutationFn: createAudioNote,
+    onSuccess: () => {
+      navigate({ to: "/p/create-entry/submitted" })
+    },
   })
+
+  useEffect(() => {
+    if (
+      recorder.recorderState === "recording" &&
+      recordingDuration &&
+      recordingDuration > 299
+    ) {
+      recorder.endRecording()
+    }
+  }, [recorder, recordingDuration])
 
   if (!audio) return
 
@@ -81,43 +95,24 @@ function Component() {
           <Progress value={recordingDuration} max={300} />
         </>
       )}
-      {recorder.recorderState === "inactive" && recorder.chunks.length > 0 && (
+      {recorder.recorderState === "inactive" && blob && blobUrl && (
         <>
-          <audio ref={audioRef} src={blobUrl} />
-          <Slider
-            value={[recordingDuration ?? 0]}
-            min={0}
-            max={recordingDuration}
-            onChange={() => {}}
-          />
+          <AudioPlayer src={blobUrl} duration={recordingDuration ?? 0} />
+          <Button
+            disabled={uploadMutation.isPending}
+            onClick={() => uploadMutation.mutate(blob)}
+          >
+            {uploadMutation.isIdle && (
+              <>
+                Submit <Icons.ArrowRight />
+              </>
+            )}
+            {uploadMutation.isPending && (
+              <Icons.Loader className="animate-spin" />
+            )}
+            {uploadMutation.isSuccess && <Icons.Check />}
+          </Button>
         </>
-      )}
-    </div>
-  )
-
-  return (
-    <div className="grid place-items-center gap-2">
-      <Button onClick={() => recorder.startRecording()}>Start recording</Button>
-
-      {recorder.recorderState === "recording" && (
-        <>
-          <Button onClick={() => recorder.endRecording()}>End recording</Button>
-          <AudioVisualizer segments={4} audio={audio} />
-          {recorder.recordingStartedAt && <p>{recordingDuration}</p>}
-        </>
-      )}
-
-      {blobUrl && blob && (
-        <>
-          <audio src={blobUrl} controls />
-          <Button onClick={() => uploadMutation.mutate(blob)}>Upload</Button>
-        </>
-      )}
-      {uploadMutation.isPending && <Icons.Loader className="animate-spin" />}
-      {uploadMutation.data && (
-        <a href={uploadMutation.data.url}>
-          <Button variant={"link"}>Kopia nagrania</Button>
-        </a>
       )}
     </div>
   )
