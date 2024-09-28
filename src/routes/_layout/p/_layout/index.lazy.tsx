@@ -9,7 +9,6 @@ import { createLazyFileRoute, Link } from "@tanstack/react-router"
 import { usePatient } from "@/components/contexts/user-context"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import * as Icons from "lucide-react"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export const Route = createLazyFileRoute("/_layout/p/_layout/")({
   component: Component,
@@ -80,9 +79,6 @@ function Component() {
           </Link>
         ))}
       </div>
-      <ScrollArea className="w-full bg-violet-500">
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
     </div>
   )
 }
