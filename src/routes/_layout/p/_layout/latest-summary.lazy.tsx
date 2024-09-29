@@ -6,12 +6,6 @@ import * as Icons from "lucide-react"
 
 export const Route = createLazyFileRoute("/_layout/p/_layout/latest-summary")({
   component: Component,
-  pendingComponent: () => (
-    <div className="flex gap-2">
-      <Icons.Loader className="animate-spin" />
-      Loading
-    </div>
-  ),
 })
 
 function Component() {
@@ -29,12 +23,21 @@ function Component() {
     | { data: Record<string, string | null> }
     | undefined
 
-  if (!content) return null
+  if (!content) {
+    return (
+      <div className="flex gap-2">
+        <Icons.Loader className="animate-spin" />
+        Loading
+      </div>
+    )
+  }
 
   return (
     <Card className="my-4">
       <CardHeader>
-        <h1 className="text-2xl font-semibold">Summary of a patient for last week</h1>
+        <h1 className="text-2xl font-semibold">
+          Summary of a patient for last week
+        </h1>
       </CardHeader>
       <CardContent>
         <p>{content["data"]["content"]}</p>

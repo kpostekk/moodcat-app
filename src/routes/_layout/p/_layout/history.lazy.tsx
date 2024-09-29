@@ -22,7 +22,7 @@ function Component() {
       const happinessEntries = await Promise.all(
         Array.from({ length: monthLength }).map(async (_, i) => {
           const date = dateFns.addDays(monthStart, i)
-          const dateIso = dateFns.formatISO(date)
+          const dateIso = dateFns.formatISO(dateFns.endOfDay(date))
           const response = await client.GET("/api/notes/get-day-happiness", {
             params: { query: { day: dateIso } },
           })

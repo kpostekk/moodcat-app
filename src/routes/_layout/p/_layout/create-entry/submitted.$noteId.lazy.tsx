@@ -1,4 +1,3 @@
-import { client } from "@/lib/client"
 import { createLazyFileRoute } from "@tanstack/react-router"
 import * as Icons from "lucide-react"
 
@@ -16,6 +15,6 @@ export const Route = createLazyFileRoute(
 
 function Component() {
   const data = Route.useLoaderData()
-
+  return <p>{data.data?.content}</p>
   return <pre>{JSON.stringify(data, null, 2)}</pre>
 }
