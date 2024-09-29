@@ -6,6 +6,7 @@ import { createLazyFileRoute } from "@tanstack/react-router"
 import * as Icons from "lucide-react"
 import { loginPatient, logout } from "@/lib/users"
 import { client } from "@/lib/client"
+import { Alert, AlertTitle } from "@/components/ui/alert"
 
 export const Route = createLazyFileRoute("/_layout/login")({
   component: Component,
@@ -23,7 +24,7 @@ function Component() {
       if (user.error) throw new Error()
 
       setUser({ name: user.data.email ?? "Patient", type: "patient" })
-      navigate({ to: "/p" })
+      await navigate({ to: "/p" })
     },
   })
 
@@ -31,6 +32,8 @@ function Component() {
     mutationFn: async () => {
       // for future use
       await logout()
+    },
+    onSettled: () => {
       setUser(undefined)
     },
   })
@@ -38,6 +41,14 @@ function Component() {
   return (
     <div className="grid h-screen w-screen place-items-center">
       <Card className="w-3/4 sm:w-72">
+        <div className="px-4 pt-4">
+          <Alert>
+            <Icons.Info />
+            <AlertTitle className="text-xs">
+              You can just click to login, no credentials necessary
+            </AlertTitle>
+          </Alert>
+        </div>
         <CardHeader>
           {!user && <CardTitle>Login</CardTitle>}
           {user && <CardTitle>Hi! {user.name}</CardTitle>}
