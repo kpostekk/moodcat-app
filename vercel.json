@@ -3,12 +3,12 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/" },
     {
-      "source": "/api",
-      "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/api"
+      "source": "/api/:path",
+      "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/api/:path"
     },
     {
-      "source": "/swagger",
-      "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/swagger"
+      "source": "/swagger/:path",
+      "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/swagger/:path"
     }
   ]
 }
