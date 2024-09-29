@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" },
     {
       "source": "/api/:path",
       "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/api/:path"
@@ -9,6 +8,7 @@
     {
       "source": "/swagger/:path",
       "destination": "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/swagger/:path"
-    }
+    },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
