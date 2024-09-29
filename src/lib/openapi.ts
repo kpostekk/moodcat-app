@@ -21,6 +21,46 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
+    "/api/day-summaries/generate-summarize-day": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generates AI day summary from user notes
+         * @description Generates a summary of a specific day from user's notes utilising OpenAI's ChatGPT.
+         */
+        post: operations["GenerateSummarizeDaySummaryEndpoint"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/day-summaries/generate-summarize-week": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generates AI week summary from user notes
+         * @description Generates a summary of a specific week from user's notes utilising OpenAI's ChatGPT.
+         */
+        post: operations["GenerateSummarizeWeekSummaryEndpoint"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/auth/register": {
         parameters: {
             query?: never;
@@ -455,6 +495,26 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
+    "/api/notes/get-day-happiness": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Returns happiness for the day
+         * @description Returns happiness for the day
+         */
+        get: operations["GetHappinessForDay"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/notes": {
         parameters: {
             query?: never;
@@ -495,6 +555,23 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
+    "/api/notes/update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Note with Text or Audio */
+        patch: operations["Update Note"];
+        trace?: never;
+    };
     "/api/openai/chatgpt": {
         parameters: {
             query?: never;
@@ -529,6 +606,26 @@ export type paths = {
          * @description Stwórz transkrypcję mowy
          */
         post: operations["CreateWhisperSendAudioFile"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/openai/generate-question-for-user": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Gets random question from assistant
+         * @description Get random question from assistant for user (in order to complete note)
+         */
+        post: operations["GetRandomQuestionFromAssistantEndpoint"];
         delete?: never;
         options?: never;
         head?: never;
@@ -603,9 +700,9 @@ export type components = {
             data?: components["schemas"]["ChatGptResultDTO"];
         };
         CreateNoteMetaDTO: {
-            providedQuestion?: string | null;
             /** Format: int32 */
             happinessLevel?: number;
+            providedQuestion?: string | null;
         };
         /** @description Notatka do stworzenia */
         CreateNoteRequest: {
@@ -626,6 +723,11 @@ export type components = {
             title?: string | null;
             content?: string | null;
         };
+        /** @description Żądanie stworzenia summary dla dnia */
+        CreateSummaryRequest: {
+            /** @description Wymuś odświeżenie */
+            forceRefresh?: boolean;
+        };
         /** @description Request do stworzenia */
         CreateWhisperSendAudioFileRequest: {
             data?: components["schemas"]["WhisperRequestDTO"];
@@ -633,8 +735,50 @@ export type components = {
         CreateWhisperSendAudioFileResponse: {
             data?: components["schemas"]["WhisperResultDTO"];
         };
+        DaySummarizeResultDTO: {
+            userId?: string | null;
+            content?: string | null;
+            originalContent?: string | null;
+            /** Format: double */
+            happinessLevel?: number;
+            patientGeneralFunctioning?: string | null;
+            originalPatientGeneralFunctioning?: string | null;
+            interests?: string | null;
+            originalInterests?: string | null;
+            socialRelationships?: string | null;
+            originalSocialRelationships?: string | null;
+            work?: string | null;
+            originalWork?: string | null;
+            family?: string | null;
+            originalFamily?: string | null;
+            physicalHealth?: string | null;
+            originalPhysicalHealth?: string | null;
+            memories?: string | null;
+            originalMemories?: string | null;
+            repotedProblems?: string | null;
+            originalRepotedProblems?: string | null;
+            other?: string | null;
+            originalOther?: string | null;
+        };
         ForgotPasswordRequest: {
             email: string | null;
+        };
+        GenerateSummarizeDayResult: {
+            data?: components["schemas"]["DaySummarizeResultDTO"];
+        };
+        /** @description Wynik zapytania zwracającego zapytanie dla wybranego dnia */
+        GetHappinessForDayResponse: {
+            /** Format: double */
+            happiness?: number;
+        };
+        GetRandomQuestionForUserQuery: {
+            topic?: string | null;
+            language?: string | null;
+            tags?: string[] | null;
+        };
+        GetRandomQuestionForUserResult: {
+            question?: string | null;
+            language?: string | null;
         };
         GetTodaysNotesResult: {
             notes?: components["schemas"]["NoteDetailedResponseDTO"][] | null;
@@ -732,6 +876,12 @@ export type components = {
             isTwoFactorEnabled: boolean;
             isMachineRemembered: boolean;
         };
+        /** @description Request aktualizacji notatki */
+        UpdateNoteRequest: {
+            /** Format: uuid */
+            noteId?: string;
+            data?: components["schemas"]["CreateNoteRequestDTO"];
+        };
         UserResponseDTO: {
             username?: string | null;
             email?: string | null;
@@ -790,6 +940,108 @@ export interface operations {
             };
         };
     };
+    GenerateSummarizeDaySummaryEndpoint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateSummaryRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenerateSummarizeDayResult"];
+                };
+            };
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
+    GenerateSummarizeWeekSummaryEndpoint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateSummaryRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenerateSummarizeDayResult"];
+                };
+            };
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
     "MapIdentityApi-/api/auth/confirmEmail": {
         parameters: {
             query?: {
@@ -841,6 +1093,55 @@ export interface operations {
                 };
                 content: {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
+    GetHappinessForDay: {
+        parameters: {
+            query: {
+                day: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetHappinessForDayResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetHappinessForDayResponse"];
                 };
             };
         };
@@ -914,6 +1215,39 @@ export interface operations {
             };
         };
     };
+    "Update Note": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateNoteRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateNoteResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
     CreateGptChatCompletion: {
         parameters: {
             query?: never;
@@ -973,6 +1307,57 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    GetRandomQuestionFromAssistantEndpoint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GetRandomQuestionForUserQuery"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetRandomQuestionForUserResult"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
             };
         };
     };
