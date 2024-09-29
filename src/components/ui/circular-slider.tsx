@@ -57,10 +57,7 @@ export function CustomCircularSlider(props: CustomCircularSliderProps) {
         <CircularSlider
           min={0}
           max={50}
-          initialValue={value}
-          // value={value}
           onChange={(value: number) => setValue(value)}
-          // onChange={(value: number) => setValue(value)}
           progressColorFrom={gradient[value]}
           progressColorTo={gradient[value]}
           knobPosition="top"
