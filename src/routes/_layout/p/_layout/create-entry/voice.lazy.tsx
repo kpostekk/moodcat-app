@@ -1,15 +1,31 @@
 import { Button } from "@/components/ui/button"
-import { AudioVisualizer, Visualizer } from "@/components/ui/visualizer"
 import { useAudioRecorder, useAudioStream } from "@/lib/audio"
 import { createLazyFileRoute } from "@tanstack/react-router"
-import { useEffect, useMemo, useState } from "react"
+import { lazy, Suspense, useEffect, useMemo, useState } from "react"
 import * as dateFns from "date-fns"
 import { DefaultError, useMutation } from "@tanstack/react-query"
 import * as Icons from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { AudioPlayer } from "@/components/ui/audio-player"
 import { createAudioNote } from "@/lib/notes"
-import { CustomCircularSlider } from "@/components/ui/circular-slider"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+
+// offload heavy components loads
+const AudioVisualizer = lazy(() =>
+  import("@/components/ui/visualizer").then((mod) => ({
+    default: mod.AudioVisualizer,
+  })),
+)
+const Visualizer = lazy(() =>
+  import("@/components/ui/visualizer").then((mod) => ({
+    default: mod.Visualizer,
+  })),
+)
+const CustomCircularSlider = lazy(() =>
+  import("@/components/ui/circular-slider").then((mod) => ({
+    default: mod.CustomCircularSlider,
+  })),
+)
 
 export const Route = createLazyFileRoute(
   "/_layout/p/_layout/create-entry/voice",
@@ -90,13 +106,19 @@ function Component() {
     return (
       <div className="grid place-content-center">
         <h1 className="my-4 text-2xl font-semibold">I feel...</h1>
-        <CustomCircularSlider
-          initValue={20}
-          onChange={(n) => {
-            setHappiness(5 - Math.floor(n / 10))
-          }}
-        />
-        <p>{happiness}</p>
+        <Suspense>
+          <CustomCircularSlider
+            initValue={20}
+            onChange={(n) => {
+              setHappiness(5 - Math.floor(n / 10))
+            }}
+          />
+        </Suspense>
+        <Alert>
+          <AlertTitle>Tip!</AlertTitle>
+          <AlertDescription>Rotate slider to describe how you feel now</AlertDescription>
+        </Alert>
+        {/* <p>{happiness}</p> */}
         <Button
           onClick={() => {
             setHideHappy(true)
@@ -110,12 +132,14 @@ function Component() {
 
   return (
     <div className="grid place-items-center gap-2">
-      {recorder.recorderState === "inactive" && (
-        <Visualizer values={[0.3, 0.3, 0.3, 0.3]} />
-      )}
-      {recorder.recorderState === "recording" && (
-        <AudioVisualizer segments={4} audio={audio} />
-      )}
+      <Suspense>
+        {recorder.recorderState === "inactive" && (
+          <Visualizer values={[0.3, 0.3, 0.3, 0.3]} />
+        )}
+        {recorder.recorderState === "recording" && (
+          <AudioVisualizer segments={4} audio={audio} />
+        )}
+      </Suspense>
       {recorder.recorderState === "inactive" && (
         <Button onClick={() => recorder.startRecording()}>
           Start recording
