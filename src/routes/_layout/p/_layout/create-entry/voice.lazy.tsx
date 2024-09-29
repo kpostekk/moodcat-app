@@ -7,7 +7,7 @@ import { DefaultError, useMutation } from "@tanstack/react-query"
 import * as Icons from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { AudioPlayer } from "@/components/ui/audio-player"
-import { createAudioNote } from "@/lib/notes"
+import { createAudioNote, suggestQuestion } from "@/lib/notes"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 // offload heavy components loads
@@ -75,19 +75,19 @@ function Component() {
     return dateFns.differenceInSeconds(now, recorder.recordingStartedAt)
   }, [now, recorder.recordingEndedAt, recorder.recordingStartedAt])
 
-  const uploadMutation = useMutation<
-    Awaited<ReturnType<typeof createAudioNote>>,
-    DefaultError,
-    [Blob, number]
-  >({
-    mutationFn: ([b, n]) => createAudioNote(b, n),
-    onSuccess: (x) => {
+  const uploadMutation = useMutation({
+    mutationFn: createAudioNote,
+    onSuccess: async (x) => {
       if (!x.data?.response?.noteId) return
-      navigate({
+      await navigate({
         to: "/p/create-entry/submitted/$noteId",
         params: { noteId: x.data.response.noteId },
       })
     },
+  })
+
+  const questionMutation = useMutation({
+    mutationFn: () => suggestQuestion(),
   })
 
   useEffect(() => {
@@ -116,7 +116,9 @@ function Component() {
         </Suspense>
         <Alert>
           <AlertTitle>Tip!</AlertTitle>
-          <AlertDescription>Rotate slider to describe how you feel now</AlertDescription>
+          <AlertDescription>
+            Rotate slider to describe how you feel now
+          </AlertDescription>
         </Alert>
         {/* <p>{happiness}</p> */}
         <Button
@@ -140,10 +142,32 @@ function Component() {
           <AudioVisualizer segments={4} audio={audio} />
         )}
       </Suspense>
+      {questionMutation.data?.data?.question && (
+        <div className="ml-4 border-l-4 border-secondary-foreground/50 pl-4">
+          <h1 className="text-lg font-semibold">
+            {questionMutation.data.data.question}
+          </h1>
+        </div>
+      )}
+      {questionMutation.isPending && (
+        <div className="ml-4 border-l-4 border-secondary-foreground/50 pl-4">
+          <p className="flex">
+            Loading a starter question <Icons.Loader className="animate-spin" />{" "}
+          </p>
+        </div>
+      )}
       {recorder.recorderState === "inactive" && (
         <Button onClick={() => recorder.startRecording()}>
           Start recording
         </Button>
+      )}
+      {questionMutation.isIdle && (
+        <div className="my-4 flex items-center gap-2">
+          <h2>No idea how to start?</h2>
+          <Button variant={"outline"} onClick={() => questionMutation.mutate()}>
+            Suggest me something
+          </Button>
+        </div>
       )}
       {recorder.recorderState === "recording" && (
         <>
@@ -156,7 +180,14 @@ function Component() {
           <AudioPlayer src={blobUrl} duration={recordingDuration ?? 0} />
           <Button
             disabled={uploadMutation.isPending}
-            onClick={() => uploadMutation.mutate([blob, happiness ?? 0])}
+            onClick={() =>
+              uploadMutation.mutate({
+                blob,
+                happinessLevel: happiness ?? 0,
+                providedQuestion:
+                  questionMutation.data?.data?.question ?? undefined,
+              })
+            }
           >
             {uploadMutation.isIdle && (
               <>

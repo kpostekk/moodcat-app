@@ -63,7 +63,8 @@ export function CustomCircularSlider(props: CustomCircularSliderProps) {
           knobPosition="top"
           progressSize={12}
           valueFontSize="4rem"
-          trackSize={0}
+          trackSize={12}
+          trackColor="#f0f0f0"
           renderLabelValue={<></>}
           width={256}
         />
