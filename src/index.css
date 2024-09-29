@@ -28,6 +28,29 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    --f-green-0: #ffffff;
+    --f-green-1: #e6f4eb;
+    --f-green-1\.5: #daeee1;
+    --f-green-4: #9dd1af;
+    --f-green-5: #84c69b;
+    --f-green-6: #73b289;
+    --f-green-7: #619e76;
+    --f-green-8: #619e76;
+    --f-green-8\.5: #477f5b;
+    --f-green-9: #366b48;
+    --sand: #e2e3dc;
+    --s-green-0: #e4fdfa;
+    --s-green-1: #b8ded9;
+    --s-green-1\.5: #a1cec9;
+    --s-green-4: #328178;
+    --s-green-5: #010a09;
+    --s-green-6: #054e46;
+    --s-green-7: #043b34;
+    --s-green-8\.5: #021d1a;
+    --s-green-9: #010a09;
+    --blue-0: #FAFAFD;
+    --blue-5: #37519D;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -43,7 +66,7 @@
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
     --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98% ;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;

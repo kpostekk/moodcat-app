@@ -22,6 +22,7 @@ export default {
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          // DEFAULT: "var(--s-green-6)",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -34,6 +35,7 @@ export default {
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
+          // DEFAULT: "var(--s-green-6)",
           foreground: "hsl(var(--accent-foreground))",
         },
         destructive: {
@@ -49,6 +51,94 @@ export default {
           3: "hsl(var(--chart-3))",
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
+        },
+        "f-green-0": {
+          DEFAULT: "var--f-green-0)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-1": {
+          DEFAULT: "var(--f-green-1)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-1.5": {
+          DEFAULT: "var(--f-green-1.5)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-4": {
+          DEFAULT: "var(--f-green-4)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-5": {
+          DEFAULT: "var(--f-green-5)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-6": {
+          DEFAULT: "var(--f-green-6)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-7": {
+          DEFAULT: "var(--f-green-7)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-8": {
+          DEFAULT: "var(--f-green-8)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-8.5": {
+          DEFAULT: "var(--f-green-8.5)",
+          foreground: "var(--foreground)",
+        },
+        "f-green-9": {
+          DEFAULT: "var(--f-green-9)",
+          foreground: "var(--foreground)",
+        },
+        sand: {
+          DEFAULT: "var(--sand)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-0": {
+          DEFAULT: "var(--s-green-0)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-1": {
+          DEFAULT: "var(--s-green-1)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-1.5": {
+          DEFAULT: "var(--s-green-1.5)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-4": {
+          DEFAULT: "var(--s-green-4)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-5": {
+          DEFAULT: "var(--s-green-5)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-6": {
+          DEFAULT: "var(--s-green-6)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-7": {
+          DEFAULT: "var(--s-green-7)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-8.5": {
+          DEFAULT: "var(--s-green-8.5)",
+          foreground: "var(--foreground)",
+        },
+        "s-green-9": {
+          DEFAULT: "var(--s-green-9)",
+          foreground: "var(--foreground)",
+        },
+        "blue-0": {
+          DEFAULT: "var(--blue-0)",
+          foreground: "var(--foreground)",
+        },
+        "blue-5": {
+          DEFAULT: "var(--blue-5)",
+          foreground: "var(--foreground)",
         },
       },
     },
