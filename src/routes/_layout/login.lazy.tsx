@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useMutation } from "@tanstack/react-query"
 import { createLazyFileRoute } from "@tanstack/react-router"
 import * as Icons from "lucide-react"
-import { loginPatient } from "@/lib/users"
+import { loginPatient, logout } from "@/lib/users"
 import { client } from "@/lib/client"
 
 export const Route = createLazyFileRoute("/_layout/login")({
@@ -30,6 +30,7 @@ function Component() {
   const logoutMutation = useMutation({
     mutationFn: async () => {
       // for future use
+      await logout()
       setUser(undefined)
     },
   })
