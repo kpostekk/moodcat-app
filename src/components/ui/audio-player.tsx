@@ -31,7 +31,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
   return (
     <>
       <audio src={props.src} ref={ref} />
-      <div className="flex justify-center gap-1.5">
+      <div className="flex justify-center gap-1.5 items-center">
         <Button variant={"outline"} onClick={() => void ref.current?.play()}>
           <Icons.Play />
         </Button>
