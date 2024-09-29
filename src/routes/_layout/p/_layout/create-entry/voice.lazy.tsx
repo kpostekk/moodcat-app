@@ -59,10 +59,18 @@ function Component() {
     return dateFns.differenceInSeconds(now, recorder.recordingStartedAt)
   }, [now, recorder.recordingEndedAt, recorder.recordingStartedAt])
 
-  const uploadMutation = useMutation<unknown, DefaultError, [Blob, number]>({
+  const uploadMutation = useMutation<
+    Awaited<ReturnType<typeof createAudioNote>>,
+    DefaultError,
+    [Blob, number]
+  >({
     mutationFn: ([b, n]) => createAudioNote(b, n),
-    onSuccess: () => {
-      navigate({ to: "/p/create-entry/submitted" })
+    onSuccess: (x) => {
+      if (!x.data?.response?.noteId) return
+      navigate({
+        to: "/p/create-entry/submitted/$noteId",
+        params: { noteId: x.data.response.noteId },
+      })
     },
   })
 
