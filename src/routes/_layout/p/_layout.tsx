@@ -11,7 +11,7 @@ function Component() {
 
   return (
     <Navbar>
-      <div className="container relative mx-auto max-w-xl">
+      <div className="container relative mx-auto max-w-xl px-2 lg:px-0">
         <Outlet />
       </div>
     </Navbar>

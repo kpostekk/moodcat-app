@@ -34,30 +34,26 @@ function Component() {
       <h2 className="text-lg font-bold">Your journal</h2>
       <div className="grid grid-cols-2 gap-2">
         <Link to={"/p/create-entry"}>
-          <Card className="bg-s-green-0 duration-100 hover:-translate-y-1 hover:translate-x-1">
+          <Card className="relative h-28 bg-[#f7f8f3] duration-100 hover:-translate-y-1 hover:translate-x-1 lg:h-32">
             <CardHeader>
               <CardTitle>Add new entry</CardTitle>
             </CardHeader>
-            <CardFooter className="justify-end">
-              <Icons.Plus />
-            </CardFooter>
+            <Icons.Plus className="absolute bottom-6 right-6" />
           </Card>
         </Link>
         <Link to={"/p/history"}>
-          <Card className="bg-s-green-0 duration-100 hover:-translate-y-1 hover:translate-x-1">
+          <Card className="relative h-28 bg-[#f7f8f3] duration-100 hover:-translate-y-1 hover:translate-x-1 lg:h-32">
             <CardHeader>
               <CardTitle>Browse past entries</CardTitle>
             </CardHeader>
-            <CardFooter className="justify-end">
-              <Icons.Search />
-            </CardFooter>
+            <Icons.Search className="absolute bottom-6 right-6" />
           </Card>
         </Link>
       </div>
       <h2 className="text-lg font-bold">Planned visits</h2>
       <div className="flex w-full flex-row gap-2 overflow-x-auto">
         {Array.from({ length: 3 }).map((_, i) => (
-          <Link key={i} className="w-2/5 flex-none">
+          <Link key={i} className="w-2/5 min-w-56 flex-none">
             <Card>
               <CardHeader>
                 <CardTitle>
