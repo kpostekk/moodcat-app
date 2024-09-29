@@ -198,6 +198,11 @@ function Component() {
               <Icons.Loader className="animate-spin" />
             )}
             {uploadMutation.isSuccess && <Icons.Check />}
+            {uploadMutation.isError && (
+              <div className="flex gap-2 items-center">
+                <Icons.X /> Error, try again
+              </div>
+            )}
           </Button>
         </>
       )}
