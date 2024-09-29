@@ -18,4 +18,12 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api":
+        "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/",
+      "/swagger":
+        "https://moodcat-gvdmc4f3fdgugqbp.polandcentral-01.azurewebsites.net/",
+    },
+  },
 })
