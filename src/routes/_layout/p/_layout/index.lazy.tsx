@@ -9,7 +9,6 @@ import { createLazyFileRoute, Link } from "@tanstack/react-router"
 import { usePatient } from "@/components/contexts/user-context"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import * as Icons from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 export const Route = createLazyFileRoute("/_layout/p/_layout/")({
   component: Component,
