@@ -33,3 +33,13 @@ export const createTextNote = (text: string, happinessLevel: number) => {
     },
   })
 }
+
+export const suggestQuestion = async () => {
+  return client.POST("/api/openai/generate-question-for-user", {
+    body: {
+      language: "en",
+      tags: ["ptsd", "toxic relationships", "anxiety"],
+      topic: "first week of therapy",
+    },
+  })
+}
