@@ -1,13 +1,9 @@
 import { useCallback, useEffect, useState } from "react"
 import { useAsync } from "react-use"
 
-const FFT_SIZE = 1024
+const FFT_SIZE = 2048
 
 export const useAudioStream = () => {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    throw new Error("This device does not support audio recording!")
-  }
-
   const audioAsync = useAsync(async () => {
     const stream = navigator.mediaDevices.getUserMedia({ audio: true })
     return stream
@@ -20,36 +16,7 @@ export const useAudioStream = () => {
   return audioAsync.value
 }
 
-// export const useAudioContext = () => {
-//   const [context, setContext] = useState<AudioContext>()
-
-//   useEffect(() => {
-//     const ac = new AudioContext()
-//     setContext(ac)
-
-//     return () => {
-//       ac.close()
-//     }
-//   }, [])
-
-//   return context
-// }
-
-// export type AudioLevelsOpts = {
-//   transform?: (n: number) => number
-//   probeFrequency?: number
-// }
-
 export const useAudioLevels = (audio?: MediaStream) => {
-  // const transform = useMemo(() => {
-  //   return opts?.transform ?? ((x: number) => x / 255)
-  // }, [opts?.transform])
-  // const probe = useMemo(() => {
-  //   return opts?.probeFrequency ?? 30
-  // }, [opts?.probeFrequency])
-  // const context = useRef(new AudioContext())
-  // const source = useRef<MediaStreamAudioSourceNode>()
-  // const analyzer = useRef<AnalyserNode>()
   const [levels, setLevels] = useState<number[]>([])
 
   useEffect(() => {
@@ -110,19 +77,11 @@ export const useAudioRecorder = (audio?: MediaStream) => {
     if (!recorder) throw new Error("Recorder is not ready!")
     recorder.start()
     setRecordingStartedAt(new Date())
+    setRecordingEndedAt(undefined)
     setRecorderState(recorder.state)
     setChunks([])
 
-    // recorder.ondataavailable = updateChunks
-
     recorder.addEventListener("dataavailable", updateChunks)
-
-    // return () => {
-    //   recorder.stop()
-    //   setRecorderState(recorder.state)
-    //   setRecordingEndedAt(new Date())
-    //   recorder.removeEventListener("dataavailable", updateChunks)
-    // }
   }, [recorder, updateChunks])
 
   const endRecording = useCallback(() => {
@@ -131,7 +90,6 @@ export const useAudioRecorder = (audio?: MediaStream) => {
     recorder.stop()
     setRecorderState(recorder.state)
     setRecordingEndedAt(new Date())
-    // recorder.removeEventListener("dataavailable", updateChunks)
   }, [recorder])
 
   return {

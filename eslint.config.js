@@ -11,7 +11,7 @@ export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.strict,
+      ...tseslint.configs.strictTypeChecked,
       ...pluginRouter.configs["flat/recommended"],
     ],
     settings: {
@@ -37,6 +37,11 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "@typescript-eslint/no-confusing-void-expression": [
+        "error",
+        { ignoreArrowShorthand: true },
+      ],
+      "@typescript-eslint/no-floating-promises": ["warn"],
     },
   },
   {

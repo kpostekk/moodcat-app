@@ -32,7 +32,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
     <>
       <audio src={props.src} ref={ref} />
       <div className="flex justify-center gap-1.5">
-        <Button variant={"outline"} onClick={() => ref.current?.play()}>
+        <Button variant={"outline"} onClick={() => void ref.current?.play()}>
           <Icons.Play />
         </Button>
         <Button variant={"outline"} onClick={() => ref.current?.pause()}>

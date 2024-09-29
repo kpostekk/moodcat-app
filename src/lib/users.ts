@@ -29,6 +29,5 @@ export const loginTherapist = () => {
 }
 
 export const logout = () => {
-  const cookie = document.cookie
-  console.log("cookie", cookie)
+  return client.POST("/api/auth/custom/logout")
 }

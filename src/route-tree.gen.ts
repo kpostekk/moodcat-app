@@ -15,6 +15,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { Route as rootRoute } from "./routes/__root"
 import { Route as LayoutImport } from "./routes/_layout"
 import { Route as LayoutPLayoutImport } from "./routes/_layout/p/_layout"
+import { Route as LayoutPLayoutCreateEntrySubmittedNoteIdRouteImport } from "./routes/_layout/p/_layout/create-entry/submitted.$noteId.route"
 
 // Create Virtual Routes
 
@@ -39,9 +40,6 @@ const LayoutPLayoutCreateEntryVoiceLazyImport = createFileRoute(
 )()
 const LayoutPLayoutCreateEntryTextLazyImport = createFileRoute(
   "/_layout/p/_layout/create-entry/text",
-)()
-const LayoutPLayoutCreateEntrySubmittedLazyImport = createFileRoute(
-  "/_layout/p/_layout/create-entry/submitted",
 )()
 
 // Create/Update Routes
@@ -142,15 +140,11 @@ const LayoutPLayoutCreateEntryTextLazyRoute =
     ),
   )
 
-const LayoutPLayoutCreateEntrySubmittedLazyRoute =
-  LayoutPLayoutCreateEntrySubmittedLazyImport.update({
-    path: "/create-entry/submitted",
+const LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute =
+  LayoutPLayoutCreateEntrySubmittedNoteIdRouteImport.update({
+    path: "/create-entry/submitted/$noteId",
     getParentRoute: () => LayoutPLayoutRoute,
-  } as any).lazy(() =>
-    import("./routes/_layout/p/_layout/create-entry/submitted.lazy").then(
-      (d) => d.Route,
-    ),
-  )
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -233,13 +227,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LayoutPLayoutIndexLazyImport
       parentRoute: typeof LayoutPLayoutImport
     }
-    "/_layout/p/_layout/create-entry/submitted": {
-      id: "/_layout/p/_layout/create-entry/submitted"
-      path: "/create-entry/submitted"
-      fullPath: "/p/create-entry/submitted"
-      preLoaderRoute: typeof LayoutPLayoutCreateEntrySubmittedLazyImport
-      parentRoute: typeof LayoutPLayoutImport
-    }
     "/_layout/p/_layout/create-entry/text": {
       id: "/_layout/p/_layout/create-entry/text"
       path: "/create-entry/text"
@@ -261,6 +248,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof LayoutPLayoutCreateEntryIndexLazyImport
       parentRoute: typeof LayoutPLayoutImport
     }
+    "/_layout/p/_layout/create-entry/submitted/$noteId": {
+      id: "/_layout/p/_layout/create-entry/submitted/$noteId"
+      path: "/create-entry/submitted/$noteId"
+      fullPath: "/p/create-entry/submitted/$noteId"
+      preLoaderRoute: typeof LayoutPLayoutCreateEntrySubmittedNoteIdRouteImport
+      parentRoute: typeof LayoutPLayoutImport
+    }
   }
 }
 
@@ -270,23 +264,23 @@ interface LayoutPLayoutRouteChildren {
   LayoutPLayoutHistoryLazyRoute: typeof LayoutPLayoutHistoryLazyRoute
   LayoutPLayoutLatestSummaryLazyRoute: typeof LayoutPLayoutLatestSummaryLazyRoute
   LayoutPLayoutIndexLazyRoute: typeof LayoutPLayoutIndexLazyRoute
-  LayoutPLayoutCreateEntrySubmittedLazyRoute: typeof LayoutPLayoutCreateEntrySubmittedLazyRoute
   LayoutPLayoutCreateEntryTextLazyRoute: typeof LayoutPLayoutCreateEntryTextLazyRoute
   LayoutPLayoutCreateEntryVoiceLazyRoute: typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   LayoutPLayoutCreateEntryIndexLazyRoute: typeof LayoutPLayoutCreateEntryIndexLazyRoute
+  LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute: typeof LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute
 }
 
 const LayoutPLayoutRouteChildren: LayoutPLayoutRouteChildren = {
   LayoutPLayoutHistoryLazyRoute: LayoutPLayoutHistoryLazyRoute,
   LayoutPLayoutLatestSummaryLazyRoute: LayoutPLayoutLatestSummaryLazyRoute,
   LayoutPLayoutIndexLazyRoute: LayoutPLayoutIndexLazyRoute,
-  LayoutPLayoutCreateEntrySubmittedLazyRoute:
-    LayoutPLayoutCreateEntrySubmittedLazyRoute,
   LayoutPLayoutCreateEntryTextLazyRoute: LayoutPLayoutCreateEntryTextLazyRoute,
   LayoutPLayoutCreateEntryVoiceLazyRoute:
     LayoutPLayoutCreateEntryVoiceLazyRoute,
   LayoutPLayoutCreateEntryIndexLazyRoute:
     LayoutPLayoutCreateEntryIndexLazyRoute,
+  LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute:
+    LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute,
 }
 
 const LayoutPLayoutRouteWithChildren = LayoutPLayoutRoute._addFileChildren(
@@ -330,10 +324,10 @@ export interface FileRoutesByFullPath {
   "/p/history": typeof LayoutPLayoutHistoryLazyRoute
   "/p/latest-summary": typeof LayoutPLayoutLatestSummaryLazyRoute
   "/p/": typeof LayoutPLayoutIndexLazyRoute
-  "/p/create-entry/submitted": typeof LayoutPLayoutCreateEntrySubmittedLazyRoute
   "/p/create-entry/text": typeof LayoutPLayoutCreateEntryTextLazyRoute
   "/p/create-entry/voice": typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   "/p/create-entry": typeof LayoutPLayoutCreateEntryIndexLazyRoute
+  "/p/create-entry/submitted/$noteId": typeof LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute
 }
 
 export interface FileRoutesByTo {
@@ -346,10 +340,10 @@ export interface FileRoutesByTo {
   "/t": typeof LayoutTIndexLazyRoute
   "/p/history": typeof LayoutPLayoutHistoryLazyRoute
   "/p/latest-summary": typeof LayoutPLayoutLatestSummaryLazyRoute
-  "/p/create-entry/submitted": typeof LayoutPLayoutCreateEntrySubmittedLazyRoute
   "/p/create-entry/text": typeof LayoutPLayoutCreateEntryTextLazyRoute
   "/p/create-entry/voice": typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   "/p/create-entry": typeof LayoutPLayoutCreateEntryIndexLazyRoute
+  "/p/create-entry/submitted/$noteId": typeof LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute
 }
 
 export interface FileRoutesById {
@@ -365,10 +359,10 @@ export interface FileRoutesById {
   "/_layout/p/_layout/history": typeof LayoutPLayoutHistoryLazyRoute
   "/_layout/p/_layout/latest-summary": typeof LayoutPLayoutLatestSummaryLazyRoute
   "/_layout/p/_layout/": typeof LayoutPLayoutIndexLazyRoute
-  "/_layout/p/_layout/create-entry/submitted": typeof LayoutPLayoutCreateEntrySubmittedLazyRoute
   "/_layout/p/_layout/create-entry/text": typeof LayoutPLayoutCreateEntryTextLazyRoute
   "/_layout/p/_layout/create-entry/voice": typeof LayoutPLayoutCreateEntryVoiceLazyRoute
   "/_layout/p/_layout/create-entry/": typeof LayoutPLayoutCreateEntryIndexLazyRoute
+  "/_layout/p/_layout/create-entry/submitted/$noteId": typeof LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute
 }
 
 export interface FileRouteTypes {
@@ -384,10 +378,10 @@ export interface FileRouteTypes {
     | "/p/history"
     | "/p/latest-summary"
     | "/p/"
-    | "/p/create-entry/submitted"
     | "/p/create-entry/text"
     | "/p/create-entry/voice"
     | "/p/create-entry"
+    | "/p/create-entry/submitted/$noteId"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/"
@@ -399,10 +393,10 @@ export interface FileRouteTypes {
     | "/t"
     | "/p/history"
     | "/p/latest-summary"
-    | "/p/create-entry/submitted"
     | "/p/create-entry/text"
     | "/p/create-entry/voice"
     | "/p/create-entry"
+    | "/p/create-entry/submitted/$noteId"
   id:
     | "__root__"
     | "/"
@@ -416,10 +410,10 @@ export interface FileRouteTypes {
     | "/_layout/p/_layout/history"
     | "/_layout/p/_layout/latest-summary"
     | "/_layout/p/_layout/"
-    | "/_layout/p/_layout/create-entry/submitted"
     | "/_layout/p/_layout/create-entry/text"
     | "/_layout/p/_layout/create-entry/voice"
     | "/_layout/p/_layout/create-entry/"
+    | "/_layout/p/_layout/create-entry/submitted/$noteId"
   fileRoutesById: FileRoutesById
 }
 
@@ -490,10 +484,10 @@ export const routeTree = rootRoute
         "/_layout/p/_layout/history",
         "/_layout/p/_layout/latest-summary",
         "/_layout/p/_layout/",
-        "/_layout/p/_layout/create-entry/submitted",
         "/_layout/p/_layout/create-entry/text",
         "/_layout/p/_layout/create-entry/voice",
-        "/_layout/p/_layout/create-entry/"
+        "/_layout/p/_layout/create-entry/",
+        "/_layout/p/_layout/create-entry/submitted/$noteId"
       ]
     },
     "/_layout/t/": {
@@ -512,10 +506,6 @@ export const routeTree = rootRoute
       "filePath": "_layout/p/_layout/index.lazy.tsx",
       "parent": "/_layout/p/_layout"
     },
-    "/_layout/p/_layout/create-entry/submitted": {
-      "filePath": "_layout/p/_layout/create-entry/submitted.lazy.tsx",
-      "parent": "/_layout/p/_layout"
-    },
     "/_layout/p/_layout/create-entry/text": {
       "filePath": "_layout/p/_layout/create-entry/text.lazy.tsx",
       "parent": "/_layout/p/_layout"
@@ -526,6 +516,10 @@ export const routeTree = rootRoute
     },
     "/_layout/p/_layout/create-entry/": {
       "filePath": "_layout/p/_layout/create-entry/index.lazy.tsx",
+      "parent": "/_layout/p/_layout"
+    },
+    "/_layout/p/_layout/create-entry/submitted/$noteId": {
+      "filePath": "_layout/p/_layout/create-entry/submitted.$noteId.route.tsx",
       "parent": "/_layout/p/_layout"
     }
   }

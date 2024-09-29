@@ -17,7 +17,7 @@ function Component() {
           {/* <div className="absolute z-10 grid h-full w-full select-none place-content-center bg-background/90 opacity-0 backdrop-blur-sm duration-200 group-hover:opacity-100 group-hover:backdrop-blur-md">
             <div>🚧 under construction 🚧</div>
           </div> */}
-          <div className="flex justify-center p-12 md:p-24 lg:p-48">
+          <div className="flex justify-center p-8 md:p-16 lg:p-24">
             {scheme === "dark" ? (
               <img src="/moodcat-white.svg" alt="Moodcat logo" />
             ) : (
