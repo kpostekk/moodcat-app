@@ -735,36 +735,11 @@ export type components = {
         CreateWhisperSendAudioFileResponse: {
             data?: components["schemas"]["WhisperResultDTO"];
         };
-        DaySummarizeResultDTO: {
-            userId?: string | null;
-            content?: string | null;
-            originalContent?: string | null;
-            /** Format: double */
-            happinessLevel?: number;
-            patientGeneralFunctioning?: string | null;
-            originalPatientGeneralFunctioning?: string | null;
-            interests?: string | null;
-            originalInterests?: string | null;
-            socialRelationships?: string | null;
-            originalSocialRelationships?: string | null;
-            work?: string | null;
-            originalWork?: string | null;
-            family?: string | null;
-            originalFamily?: string | null;
-            physicalHealth?: string | null;
-            originalPhysicalHealth?: string | null;
-            memories?: string | null;
-            originalMemories?: string | null;
-            repotedProblems?: string | null;
-            originalRepotedProblems?: string | null;
-            other?: string | null;
-            originalOther?: string | null;
-        };
         ForgotPasswordRequest: {
             email: string | null;
         };
         GenerateSummarizeDayResult: {
-            data?: components["schemas"]["DaySummarizeResultDTO"];
+            data?: components["schemas"]["SummarizeResultDTO"];
         };
         /** @description Wynik zapytania zwracającego zapytanie dla wybranego dnia */
         GetHappinessForDayResponse: {
@@ -860,6 +835,31 @@ export type components = {
             email: string | null;
             resetCode: string | null;
             newPassword: string | null;
+        };
+        SummarizeResultDTO: {
+            userId?: string | null;
+            content?: string | null;
+            originalContent?: string | null;
+            /** Format: double */
+            happinessLevel?: number;
+            patientGeneralFunctioning?: string | null;
+            originalPatientGeneralFunctioning?: string | null;
+            interests?: string | null;
+            originalInterests?: string | null;
+            socialRelationships?: string | null;
+            originalSocialRelationships?: string | null;
+            work?: string | null;
+            originalWork?: string | null;
+            family?: string | null;
+            originalFamily?: string | null;
+            physicalHealth?: string | null;
+            originalPhysicalHealth?: string | null;
+            memories?: string | null;
+            originalMemories?: string | null;
+            repotedProblems?: string | null;
+            originalRepotedProblems?: string | null;
+            other?: string | null;
+            originalOther?: string | null;
         };
         TwoFactorRequest: {
             enable?: boolean | null;
