@@ -29,6 +29,12 @@ export function Navbar(props: PropsWithChildren) {
                 Add entry
               </Button>
             </Link>
+            <Link to="/login">
+              <Button variant={"link"}>
+                <Icons.LogOut />
+                Logout
+              </Button>
+            </Link>
           </div>
         </SheetContent>
       </Sheet>
