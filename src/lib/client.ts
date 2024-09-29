@@ -10,7 +10,7 @@ const throw4xx5xx: Middleware = {
 }
 
 export const client = createClient<paths>({
-  baseUrl: import.meta.env.VITE_API_URL as string,
+  baseUrl: import.meta.env.VITE_API_URL,
   credentials: "include",
 })
 
