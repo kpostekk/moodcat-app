@@ -14,7 +14,7 @@ function Component() {
     queryFn: () =>
       client.POST("/api/day-summaries/generate-summarize-week", {
         body: {
-          forceRefresh: false,
+          forceRefresh: true,
         },
       }),
   })
