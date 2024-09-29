@@ -9,6 +9,7 @@ import { createLazyFileRoute, Link } from "@tanstack/react-router"
 import { usePatient } from "@/components/contexts/user-context"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import * as Icons from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const Route = createLazyFileRoute("/_layout/p/_layout/")({
   component: Component,
@@ -26,11 +27,14 @@ function Component() {
     <div className="container mx-auto grid max-w-xl gap-4 py-4">
       <h1 className="text-3xl font-semibold">Hello {patient.name}!</h1>
       <p>Remember to update jour journal!</p>
-      <Alert className="bg-s-green-6 text-primary-foreground [&>svg]:text-primary-foreground">
-        <Icons.ClipboardCheck />
-        <AlertTitle>Your weekly raport is ready!</AlertTitle>
-        <AlertDescription>Check it out!</AlertDescription>
-      </Alert>
+      <Link to="/p/latest-summary">
+        <Alert className="bg-s-green-6 text-primary-foreground [&>svg]:text-primary-foreground">
+          <Icons.ClipboardCheck />
+          <AlertTitle>Your weekly raport is ready!</AlertTitle>
+          <AlertDescription>Check it out!</AlertDescription>
+        </Alert>
+      </Link>
+
       <h2 className="text-lg font-bold">Your journal</h2>
       <div className="grid grid-cols-2 gap-2">
         <Link to={"/p/create-entry"}>

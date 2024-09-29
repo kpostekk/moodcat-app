@@ -144,7 +144,11 @@ const LayoutPLayoutCreateEntrySubmittedNoteIdRouteRoute =
   LayoutPLayoutCreateEntrySubmittedNoteIdRouteImport.update({
     path: "/create-entry/submitted/$noteId",
     getParentRoute: () => LayoutPLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import(
+      "./routes/_layout/p/_layout/create-entry/submitted.$noteId.lazy"
+    ).then((d) => d.Route),
+  )
 
 // Populate the FileRoutesByPath interface
 
