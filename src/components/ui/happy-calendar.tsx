@@ -47,7 +47,7 @@ export function HappyCalendar(props: HappyCalendarProps) {
           <div
             key={i}
             className={clsx(
-              "grid aspect-square place-content-center text-lg rounded-lg",
+              "grid aspect-square place-content-center rounded-lg text-lg",
               happiness === 1 && "bg-[#EF9097]",
               happiness === 2 && "bg-[#F7D2A1]",
               happiness === 3 && "bg-[#FFFDA1]",

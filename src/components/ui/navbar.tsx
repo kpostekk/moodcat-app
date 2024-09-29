@@ -9,7 +9,7 @@ export function Navbar(props: PropsWithChildren) {
 
   return (
     <>
-      <nav className="sticky top-0 flex h-16 items-center border-b px-1 lg:px-8 shadow backdrop-blur">
+      <nav className="sticky top-0 flex h-16 items-center border-b px-1 shadow backdrop-blur lg:px-8">
         <Button variant={"ghost"} onClick={() => setSheetOpen(true)}>
           <Icons.Menu className="text-4xl" />
         </Button>

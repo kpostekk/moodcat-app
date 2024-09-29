@@ -4,1398 +4,1400 @@
  */
 
 export type paths = {
-    "/api/auth/custom/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Log out */
-        post: operations["Logout"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/day-summaries/generate-summarize-day": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Generates AI day summary from user notes
-         * @description Generates a summary of a specific day from user's notes utilising OpenAI's ChatGPT.
-         */
-        post: operations["GenerateSummarizeDaySummaryEndpoint"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/day-summaries/generate-summarize-week": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Generates AI week summary from user notes
-         * @description Generates a summary of a specific week from user's notes utilising OpenAI's ChatGPT.
-         */
-        post: operations["GenerateSummarizeWeekSummaryEndpoint"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/register": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["RegisterRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: {
-                    useCookies?: boolean;
-                    useSessionCookies?: boolean;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["LoginRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AccessTokenResponse"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/refresh": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["RefreshRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AccessTokenResponse"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/confirmEmail": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["MapIdentityApi-/api/auth/confirmEmail"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/resendConfirmationEmail": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["ResendConfirmationEmailRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/forgotPassword": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["ForgotPasswordRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/resetPassword": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["ResetPasswordRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/manage/2fa": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["TwoFactorRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TwoFactorResponse"];
-                    };
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/manage/info": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["InfoResponse"];
-                    };
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["InfoRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["InfoResponse"];
-                    };
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/problem+json": components["schemas"]["HttpValidationProblemDetails"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/notes/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Create Note with Text or Audio */
-        post: operations["Create Note"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/notes/get-day-happiness": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Returns happiness for the day
-         * @description Returns happiness for the day
-         */
-        get: operations["GetHappinessForDay"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/notes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get note by id
-         * @description Returns notes with provided ID
-         */
-        get: operations["GetNoteEndpoint"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/notes/today": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Gets Todays Notes
-         * @description This endpoint is used to get all the notes from the database for authorised user for today.
-         */
-        get: operations["GetTodaysNotesEndpoint"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/notes/update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /** Update Note with Text or Audio */
-        patch: operations["Update Note"];
-        trace?: never;
-    };
-    "/api/openai/chatgpt": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Wygeneruj request do chatgpt
-         * @description Wygeneruj request do chatgpt
-         */
-        post: operations["CreateGptChatCompletion"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/openai/whisper": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Stwórz transkrypcję mowy
-         * @description Stwórz transkrypcję mowy
-         */
-        post: operations["CreateWhisperSendAudioFile"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/openai/generate-question-for-user": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Gets random question from assistant
-         * @description Get random question from assistant for user (in order to complete note)
-         */
-        post: operations["GetRandomQuestionFromAssistantEndpoint"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/users": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get users paginated
-         * @description Get users paginated
-         */
-        get: operations["GetUsersPaginated"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-};
-export type webhooks = Record<string, never>;
+  "/api/auth/custom/logout": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Log out */
+    post: operations["Logout"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/day-summaries/generate-summarize-day": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Generates AI day summary from user notes
+     * @description Generates a summary of a specific day from user's notes utilising OpenAI's ChatGPT.
+     */
+    post: operations["GenerateSummarizeDaySummaryEndpoint"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/day-summaries/generate-summarize-week": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Generates AI week summary from user notes
+     * @description Generates a summary of a specific week from user's notes utilising OpenAI's ChatGPT.
+     */
+    post: operations["GenerateSummarizeWeekSummaryEndpoint"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/register": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["RegisterRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/problem+json": components["schemas"]["HttpValidationProblemDetails"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/login": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: {
+          useCookies?: boolean
+          useSessionCookies?: boolean
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["LoginRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json": components["schemas"]["AccessTokenResponse"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/refresh": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["RefreshRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json": components["schemas"]["AccessTokenResponse"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/confirmEmail": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get: operations["MapIdentityApi-/api/auth/confirmEmail"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/resendConfirmationEmail": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["ResendConfirmationEmailRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/forgotPassword": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["ForgotPasswordRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/problem+json": components["schemas"]["HttpValidationProblemDetails"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/resetPassword": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["ResetPasswordRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/problem+json": components["schemas"]["HttpValidationProblemDetails"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/manage/2fa": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["TwoFactorRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json": components["schemas"]["TwoFactorResponse"]
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/problem+json": components["schemas"]["HttpValidationProblemDetails"]
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/auth/manage/info": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json": components["schemas"]["InfoResponse"]
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/problem+json": components["schemas"]["HttpValidationProblemDetails"]
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+      }
+    }
+    put?: never
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["InfoRequest"]
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json": components["schemas"]["InfoResponse"]
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/problem+json": components["schemas"]["HttpValidationProblemDetails"]
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/notes/create": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Create Note with Text or Audio */
+    post: operations["Create Note"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/notes/get-day-happiness": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Returns happiness for the day
+     * @description Returns happiness for the day
+     */
+    get: operations["GetHappinessForDay"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/notes": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get note by id
+     * @description Returns notes with provided ID
+     */
+    get: operations["GetNoteEndpoint"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/notes/today": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Gets Todays Notes
+     * @description This endpoint is used to get all the notes from the database for authorised user for today.
+     */
+    get: operations["GetTodaysNotesEndpoint"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/notes/update": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /** Update Note with Text or Audio */
+    patch: operations["Update Note"]
+    trace?: never
+  }
+  "/api/openai/chatgpt": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Wygeneruj request do chatgpt
+     * @description Wygeneruj request do chatgpt
+     */
+    post: operations["CreateGptChatCompletion"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/openai/whisper": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Stwórz transkrypcję mowy
+     * @description Stwórz transkrypcję mowy
+     */
+    post: operations["CreateWhisperSendAudioFile"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/openai/generate-question-for-user": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Gets random question from assistant
+     * @description Get random question from assistant for user (in order to complete note)
+     */
+    post: operations["GetRandomQuestionFromAssistantEndpoint"]
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/api/users": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get users paginated
+     * @description Get users paginated
+     */
+    get: operations["GetUsersPaginated"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+}
+export type webhooks = Record<string, never>
 export type components = {
-    schemas: {
-        AccessTokenResponse: {
-            readonly tokenType?: string | null;
-            accessToken: string | null;
-            /** Format: int64 */
-            expiresIn: number;
-            refreshToken: string | null;
-        };
-        ChatGptChoiceResultDTO: {
-            index?: string | null;
-            finish_Reason?: string | null;
-            message?: components["schemas"]["ChatGptResultChoicesMessageDTO"];
-        };
-        ChatGptRequestDTO: {
-            model?: string | null;
-            message?: string | null;
-        };
-        ChatGptResultChoicesMessageDTO: {
-            role?: string | null;
-            content?: string | null;
-        };
-        ChatGptResultDTO: {
-            id?: string | null;
-            object?: string | null;
-            created?: string | null;
-            model?: string | null;
-            choices?: components["schemas"]["ChatGptChoiceResultDTO"][] | null;
-            usage?: components["schemas"]["ChatGptResultUsageDTO"];
-        };
-        ChatGptResultUsageDTO: {
-            /** Format: int32 */
-            prompt_tokens?: number;
-            /** Format: int32 */
-            completion_tokens?: number;
-            /** Format: int32 */
-            total_tokens?: number;
-        };
-        /** @description Request do stworzenia */
-        CreateGptChatCompletionRequest: {
-            data?: components["schemas"]["ChatGptRequestDTO"];
-        };
-        CreateGptChatCompletionResponse: {
-            data?: components["schemas"]["ChatGptResultDTO"];
-        };
-        CreateNoteMetaDTO: {
-            /** Format: int32 */
-            happinessLevel?: number;
-            providedQuestion?: string | null;
-        };
-        /** @description Notatka do stworzenia */
-        CreateNoteRequest: {
-            data?: components["schemas"]["CreateNoteRequestDTO"];
-        };
-        CreateNoteRequestDTO: {
-            title?: string | null;
-            audioUrl?: string | null;
-            text?: string | null;
-            meta?: components["schemas"]["CreateNoteMetaDTO"];
-        };
-        /** @description Odpowiedź na żądanie */
-        CreateNoteResponse: {
-            response?: components["schemas"]["CreateNoteResponseDTO"];
-        };
-        CreateNoteResponseDTO: {
-            noteId?: string | null;
-            title?: string | null;
-            content?: string | null;
-        };
-        /** @description Żądanie stworzenia summary dla dnia */
-        CreateSummaryRequest: {
-            /** @description Wymuś odświeżenie */
-            forceRefresh?: boolean;
-        };
-        /** @description Request do stworzenia */
-        CreateWhisperSendAudioFileRequest: {
-            data?: components["schemas"]["WhisperRequestDTO"];
-        };
-        CreateWhisperSendAudioFileResponse: {
-            data?: components["schemas"]["WhisperResultDTO"];
-        };
-        ForgotPasswordRequest: {
-            email: string | null;
-        };
-        GenerateSummarizeDayResult: {
-            data?: components["schemas"]["SummarizeResultDTO"];
-        };
-        /** @description Wynik zapytania zwracającego zapytanie dla wybranego dnia */
-        GetHappinessForDayResponse: {
-            /** Format: double */
-            happiness?: number;
-        };
-        GetRandomQuestionForUserQuery: {
-            topic?: string | null;
-            language?: string | null;
-            tags?: string[] | null;
-        };
-        GetRandomQuestionForUserResult: {
-            question?: string | null;
-            language?: string | null;
-        };
-        GetTodaysNotesResult: {
-            notes?: components["schemas"]["NoteDetailedResponseDTO"][] | null;
-        };
-        /** @description Odpowiedź na żądanie pobrania paginowanej listy użytkowników */
-        GetUsersResponse: {
-            users?: components["schemas"]["UserResponseDTOPaginatedResult"];
-        };
-        HttpValidationProblemDetails: {
-            type?: string | null;
-            title?: string | null;
-            /** Format: int32 */
-            status?: number | null;
-            detail?: string | null;
-            instance?: string | null;
-            errors?: {
-                [key: string]: string[];
-            } | null;
-        } & {
-            [key: string]: unknown;
-        };
-        InfoRequest: {
-            newEmail?: string | null;
-            newPassword?: string | null;
-            oldPassword?: string | null;
-        };
-        InfoResponse: {
-            email: string | null;
-            isEmailConfirmed: boolean;
-        };
-        LoginRequest: {
-            email: string | null;
-            password: string | null;
-            twoFactorCode?: string | null;
-            twoFactorRecoveryCode?: string | null;
-        };
-        NoteAttachmentDetailedResponseDTO: {
-            id?: string | null;
-            name?: string | null;
-            resourceUrl?: string | null;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string | null;
-        };
-        NoteDetailedResponseDTO: {
-            id?: string | null;
-            content?: string | null;
-            title?: string | null;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string | null;
-            /** Format: double */
-            happiness?: number;
-            attachments?: components["schemas"]["NoteAttachmentDetailedResponseDTO"][] | null;
-        };
-        ProblemDetails: {
-            type?: string | null;
-            title?: string | null;
-            /** Format: int32 */
-            status?: number | null;
-            detail?: string | null;
-            instance?: string | null;
-        } & {
-            [key: string]: unknown;
-        };
-        RefreshRequest: {
-            refreshToken: string | null;
-        };
-        RegisterRequest: {
-            email: string | null;
-            password: string | null;
-        };
-        ResendConfirmationEmailRequest: {
-            email: string | null;
-        };
-        ResetPasswordRequest: {
-            email: string | null;
-            resetCode: string | null;
-            newPassword: string | null;
-        };
-        SummarizeResultDTO: {
-            userId?: string | null;
-            content?: string | null;
-            originalContent?: string | null;
-            /** Format: double */
-            happinessLevel?: number;
-            patientGeneralFunctioning?: string | null;
-            originalPatientGeneralFunctioning?: string | null;
-            interests?: string | null;
-            originalInterests?: string | null;
-            socialRelationships?: string | null;
-            originalSocialRelationships?: string | null;
-            work?: string | null;
-            originalWork?: string | null;
-            family?: string | null;
-            originalFamily?: string | null;
-            physicalHealth?: string | null;
-            originalPhysicalHealth?: string | null;
-            memories?: string | null;
-            originalMemories?: string | null;
-            repotedProblems?: string | null;
-            originalRepotedProblems?: string | null;
-            other?: string | null;
-            originalOther?: string | null;
-        };
-        TwoFactorRequest: {
-            enable?: boolean | null;
-            twoFactorCode?: string | null;
-            resetSharedKey?: boolean;
-            resetRecoveryCodes?: boolean;
-            forgetMachine?: boolean;
-        };
-        TwoFactorResponse: {
-            sharedKey: string | null;
-            /** Format: int32 */
-            recoveryCodesLeft: number;
-            recoveryCodes?: string[] | null;
-            isTwoFactorEnabled: boolean;
-            isMachineRemembered: boolean;
-        };
-        /** @description Request aktualizacji notatki */
-        UpdateNoteRequest: {
-            /** Format: uuid */
-            noteId?: string;
-            data?: components["schemas"]["CreateNoteRequestDTO"];
-        };
-        UserResponseDTO: {
-            username?: string | null;
-            email?: string | null;
-            phoneNumber?: string | null;
-        };
-        UserResponseDTOPaginatedResult: {
-            /** Format: int32 */
-            pageIndex?: number;
-            /** Format: int32 */
-            pageSize?: number;
-            /** Format: int64 */
-            count?: number;
-            data?: components["schemas"]["UserResponseDTO"][] | null;
-        };
-        WhisperRequestDTO: {
-            file?: string | null;
-        };
-        WhisperResultDTO: {
-            id?: string | null;
-            object?: string | null;
-            created?: string | null;
-            model?: string | null;
-            result?: string | null;
-        };
-    };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
-};
-export type $defs = Record<string, never>;
+  schemas: {
+    AccessTokenResponse: {
+      readonly tokenType?: string | null
+      accessToken: string | null
+      /** Format: int64 */
+      expiresIn: number
+      refreshToken: string | null
+    }
+    ChatGptChoiceResultDTO: {
+      index?: string | null
+      finish_Reason?: string | null
+      message?: components["schemas"]["ChatGptResultChoicesMessageDTO"]
+    }
+    ChatGptRequestDTO: {
+      model?: string | null
+      message?: string | null
+    }
+    ChatGptResultChoicesMessageDTO: {
+      role?: string | null
+      content?: string | null
+    }
+    ChatGptResultDTO: {
+      id?: string | null
+      object?: string | null
+      created?: string | null
+      model?: string | null
+      choices?: components["schemas"]["ChatGptChoiceResultDTO"][] | null
+      usage?: components["schemas"]["ChatGptResultUsageDTO"]
+    }
+    ChatGptResultUsageDTO: {
+      /** Format: int32 */
+      prompt_tokens?: number
+      /** Format: int32 */
+      completion_tokens?: number
+      /** Format: int32 */
+      total_tokens?: number
+    }
+    /** @description Request do stworzenia */
+    CreateGptChatCompletionRequest: {
+      data?: components["schemas"]["ChatGptRequestDTO"]
+    }
+    CreateGptChatCompletionResponse: {
+      data?: components["schemas"]["ChatGptResultDTO"]
+    }
+    CreateNoteMetaDTO: {
+      /** Format: int32 */
+      happinessLevel?: number
+      providedQuestion?: string | null
+    }
+    /** @description Notatka do stworzenia */
+    CreateNoteRequest: {
+      data?: components["schemas"]["CreateNoteRequestDTO"]
+    }
+    CreateNoteRequestDTO: {
+      title?: string | null
+      audioUrl?: string | null
+      text?: string | null
+      meta?: components["schemas"]["CreateNoteMetaDTO"]
+    }
+    /** @description Odpowiedź na żądanie */
+    CreateNoteResponse: {
+      response?: components["schemas"]["CreateNoteResponseDTO"]
+    }
+    CreateNoteResponseDTO: {
+      noteId?: string | null
+      title?: string | null
+      content?: string | null
+    }
+    /** @description Żądanie stworzenia summary dla dnia */
+    CreateSummaryRequest: {
+      /** @description Wymuś odświeżenie */
+      forceRefresh?: boolean
+    }
+    /** @description Request do stworzenia */
+    CreateWhisperSendAudioFileRequest: {
+      data?: components["schemas"]["WhisperRequestDTO"]
+    }
+    CreateWhisperSendAudioFileResponse: {
+      data?: components["schemas"]["WhisperResultDTO"]
+    }
+    ForgotPasswordRequest: {
+      email: string | null
+    }
+    GenerateSummarizeDayResult: {
+      data?: components["schemas"]["SummarizeResultDTO"]
+    }
+    /** @description Wynik zapytania zwracającego zapytanie dla wybranego dnia */
+    GetHappinessForDayResponse: {
+      /** Format: double */
+      happiness?: number
+    }
+    GetRandomQuestionForUserQuery: {
+      topic?: string | null
+      language?: string | null
+      tags?: string[] | null
+    }
+    GetRandomQuestionForUserResult: {
+      question?: string | null
+      language?: string | null
+    }
+    GetTodaysNotesResult: {
+      notes?: components["schemas"]["NoteDetailedResponseDTO"][] | null
+    }
+    /** @description Odpowiedź na żądanie pobrania paginowanej listy użytkowników */
+    GetUsersResponse: {
+      users?: components["schemas"]["UserResponseDTOPaginatedResult"]
+    }
+    HttpValidationProblemDetails: {
+      type?: string | null
+      title?: string | null
+      /** Format: int32 */
+      status?: number | null
+      detail?: string | null
+      instance?: string | null
+      errors?: {
+        [key: string]: string[]
+      } | null
+    } & {
+      [key: string]: unknown
+    }
+    InfoRequest: {
+      newEmail?: string | null
+      newPassword?: string | null
+      oldPassword?: string | null
+    }
+    InfoResponse: {
+      email: string | null
+      isEmailConfirmed: boolean
+    }
+    LoginRequest: {
+      email: string | null
+      password: string | null
+      twoFactorCode?: string | null
+      twoFactorRecoveryCode?: string | null
+    }
+    NoteAttachmentDetailedResponseDTO: {
+      id?: string | null
+      name?: string | null
+      resourceUrl?: string | null
+      /** Format: date-time */
+      createdAt?: string
+      /** Format: date-time */
+      updatedAt?: string | null
+    }
+    NoteDetailedResponseDTO: {
+      id?: string | null
+      content?: string | null
+      title?: string | null
+      /** Format: date-time */
+      createdAt?: string
+      /** Format: date-time */
+      updatedAt?: string | null
+      /** Format: double */
+      happiness?: number
+      attachments?:
+        | components["schemas"]["NoteAttachmentDetailedResponseDTO"][]
+        | null
+    }
+    ProblemDetails: {
+      type?: string | null
+      title?: string | null
+      /** Format: int32 */
+      status?: number | null
+      detail?: string | null
+      instance?: string | null
+    } & {
+      [key: string]: unknown
+    }
+    RefreshRequest: {
+      refreshToken: string | null
+    }
+    RegisterRequest: {
+      email: string | null
+      password: string | null
+    }
+    ResendConfirmationEmailRequest: {
+      email: string | null
+    }
+    ResetPasswordRequest: {
+      email: string | null
+      resetCode: string | null
+      newPassword: string | null
+    }
+    SummarizeResultDTO: {
+      userId?: string | null
+      content?: string | null
+      originalContent?: string | null
+      /** Format: double */
+      happinessLevel?: number
+      patientGeneralFunctioning?: string | null
+      originalPatientGeneralFunctioning?: string | null
+      interests?: string | null
+      originalInterests?: string | null
+      socialRelationships?: string | null
+      originalSocialRelationships?: string | null
+      work?: string | null
+      originalWork?: string | null
+      family?: string | null
+      originalFamily?: string | null
+      physicalHealth?: string | null
+      originalPhysicalHealth?: string | null
+      memories?: string | null
+      originalMemories?: string | null
+      repotedProblems?: string | null
+      originalRepotedProblems?: string | null
+      other?: string | null
+      originalOther?: string | null
+    }
+    TwoFactorRequest: {
+      enable?: boolean | null
+      twoFactorCode?: string | null
+      resetSharedKey?: boolean
+      resetRecoveryCodes?: boolean
+      forgetMachine?: boolean
+    }
+    TwoFactorResponse: {
+      sharedKey: string | null
+      /** Format: int32 */
+      recoveryCodesLeft: number
+      recoveryCodes?: string[] | null
+      isTwoFactorEnabled: boolean
+      isMachineRemembered: boolean
+    }
+    /** @description Request aktualizacji notatki */
+    UpdateNoteRequest: {
+      /** Format: uuid */
+      noteId?: string
+      data?: components["schemas"]["CreateNoteRequestDTO"]
+    }
+    UserResponseDTO: {
+      username?: string | null
+      email?: string | null
+      phoneNumber?: string | null
+    }
+    UserResponseDTOPaginatedResult: {
+      /** Format: int32 */
+      pageIndex?: number
+      /** Format: int32 */
+      pageSize?: number
+      /** Format: int64 */
+      count?: number
+      data?: components["schemas"]["UserResponseDTO"][] | null
+    }
+    WhisperRequestDTO: {
+      file?: string | null
+    }
+    WhisperResultDTO: {
+      id?: string | null
+      object?: string | null
+      created?: string | null
+      model?: string | null
+      result?: string | null
+    }
+  }
+  responses: never
+  parameters: never
+  requestBodies: never
+  headers: never
+  pathItems: never
+}
+export type $defs = Record<string, never>
 export interface operations {
-    Logout: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    GenerateSummarizeDaySummaryEndpoint: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateSummaryRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GenerateSummarizeDayResult"];
-                };
-            };
-            /** @description No Content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    GenerateSummarizeWeekSummaryEndpoint: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateSummaryRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GenerateSummarizeDayResult"];
-                };
-            };
-            /** @description No Content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    "MapIdentityApi-/api/auth/confirmEmail": {
-        parameters: {
-            query?: {
-                userId?: string;
-                code?: string;
-                changedEmail?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "Create Note": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateNoteRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CreateNoteResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    GetHappinessForDay: {
-        parameters: {
-            query: {
-                day: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetHappinessForDayResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetHappinessForDayResponse"];
-                };
-            };
-        };
-    };
-    GetNoteEndpoint: {
-        parameters: {
-            query: {
-                noteId: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["NoteDetailedResponseDTO"];
-                };
-            };
-        };
-    };
-    GetTodaysNotesEndpoint: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetTodaysNotesResult"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    "Update Note": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UpdateNoteRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CreateNoteResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    CreateGptChatCompletion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateGptChatCompletionRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CreateGptChatCompletionResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    CreateWhisperSendAudioFile: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateWhisperSendAudioFileRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CreateWhisperSendAudioFileResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    GetRandomQuestionFromAssistantEndpoint: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["GetRandomQuestionForUserQuery"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetRandomQuestionForUserResult"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    GetUsersPaginated: {
-        parameters: {
-            query?: {
-                PageIndex?: number;
-                PageSize?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetUsersResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
+  Logout: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  GenerateSummarizeDaySummaryEndpoint: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateSummaryRequest"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GenerateSummarizeDayResult"]
+        }
+      }
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+    }
+  }
+  GenerateSummarizeWeekSummaryEndpoint: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateSummaryRequest"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GenerateSummarizeDayResult"]
+        }
+      }
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+    }
+  }
+  "MapIdentityApi-/api/auth/confirmEmail": {
+    parameters: {
+      query?: {
+        userId?: string
+        code?: string
+        changedEmail?: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  "Create Note": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateNoteRequest"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreateNoteResponse"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+    }
+  }
+  GetHappinessForDay: {
+    parameters: {
+      query: {
+        day: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GetHappinessForDayResponse"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GetHappinessForDayResponse"]
+        }
+      }
+    }
+  }
+  GetNoteEndpoint: {
+    parameters: {
+      query: {
+        noteId: string
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["NoteDetailedResponseDTO"]
+        }
+      }
+    }
+  }
+  GetTodaysNotesEndpoint: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GetTodaysNotesResult"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+    }
+  }
+  "Update Note": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UpdateNoteRequest"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreateNoteResponse"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+    }
+  }
+  CreateGptChatCompletion: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateGptChatCompletionRequest"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreateGptChatCompletionResponse"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  CreateWhisperSendAudioFile: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateWhisperSendAudioFileRequest"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["CreateWhisperSendAudioFileResponse"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
+  GetRandomQuestionFromAssistantEndpoint: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["GetRandomQuestionForUserQuery"]
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GetRandomQuestionForUserResult"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/problem+json": components["schemas"]["ProblemDetails"]
+        }
+      }
+    }
+  }
+  GetUsersPaginated: {
+    parameters: {
+      query?: {
+        PageIndex?: number
+        PageSize?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          "application/json": components["schemas"]["GetUsersResponse"]
+        }
+      }
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
+      }
+    }
+  }
 }
